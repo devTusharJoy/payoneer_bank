@@ -8,11 +8,11 @@
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 
-    <title>Payoneer Bank</title>
+    <title>Pioneer Bank</title>
 </head>
 <body>
     <div id="logIn-Area">
-        <h1 class="text-center">Welcome to Payoneer Bank</h1>
+        <h1 class="text-center">Welcome to Pioneer Bank</h1>
         <div class="submit">
             <h4>Log In</h4>
             <input type="text" class="form-control">
@@ -27,7 +27,7 @@
             <div class="col-md-4 ">
                 <div id="deposit" class="transaction">
                     <h4>Deposit</h4>
-                    <h2>$00</h2>
+                    <h2>$ <span id="current-Deposit">00</span></h2>
                 </div>
             </div>
             <div class="col-md-4 ">
@@ -39,23 +39,27 @@
             <div class="col-md-4">
                 <div id="balance" class="transaction">
                     <h4>Balance</h4>
-                    <h2>$1240</h2>
+                    <h2>$ <span id="current-Balance">1240</span></h2>
                 </div>
             </div>
         </div>
 
         <div class="row">
-            <div class="col-md-6 submit trans-amount">
-                <h4>Deposit</h4>
-                <input type="text" class="form-control">
-                <br>
-                <button class="btn btn-success">Deposit</button>
+            <div class="col-md-6 ">
+                <div class="submit">
+                    <h4>Deposit</h4>
+                    <input id="deposit-Amount" type="text" class="form-control" placeholder="$ Enter your Deposit Number">
+                    <br>
+                    <button id="add-Deposit" class="btn btn-success">Deposit</button>
+                </div>
             </div>
-            <div class="col-md-6 submit trans-amount">
-                <h4>Withdraw</h4>
-                <input type="text" class="form-control">
-                <br>
-                <button class="btn btn-success">Withdraw</button>
+            <div class="col-md-6">
+                <div class="submit">
+                    <h4>Withdraw</h4>
+                    <input type="text" class="form-control">
+                    <br>
+                    <button class="btn btn-success">Withdraw</button>
+                </div>
             </div>
         </div>
     </div>
@@ -73,6 +77,32 @@
             const transactionArea = document.getElementById('transaction');
             transactionArea.style.display = "block";
         })
+
+        // Deposit Button Handler
+        const depositBtn = document.getElementById('add-Deposit');
+        depositBtn.addEventListener('click', function(){
+            const depositAmount = document.getElementById('deposit-Amount').value;
+
+            const depositNumber = parseFloat(depositAmount);
+
+            const currentDeposit = document.getElementById('current-Deposit').innerText;
+            const currentDepositNumber = parseFloat(currentDeposit);
+            const totalDeposit = depositNumber + currentDepositNumber;
+            document.getElementById('current-Deposit').innerText= totalDeposit; 
+
+
+            const currentBalance = document.getElementById('current-Balance').innerText;
+            const currentBalanceNumber = parseFloat(currentBalance);
+            const totalBalance = depositNumber + currentBalanceNumber;
+            document.getElementById('current-Balance').innerText= totalBalance;
+
+            
+            document.getElementById('deposit-Amount').value="";
+
+    
+        })
+
+
     </script>
     <!-- <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script> -->
 </body>
